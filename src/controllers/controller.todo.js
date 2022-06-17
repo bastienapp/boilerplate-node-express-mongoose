@@ -68,7 +68,6 @@ const deleteById = async (request, response) => {
       response.status(404).json({ message: `No todo found with id ${id}` })
     }
   } catch (error) {
-    console.log(error)
     response.status(500).json(error)
   }
 }
