@@ -58,12 +58,26 @@ const create = async (request, response) => {
   }
 }
 
+const update = async (request, response) => {
+  const { id } = request.params
+  try {
+    const result = await TodoModel.updateOne({ _id: id }, request.body)
+    if (result.n) {
+      response.sendStatus(204)
+    } else {
+      response.status(404).json({ message: `No todo found with id ${id}` })
+    }
+  } catch (error) {
+    response.status(500).json(error)
+  }
+}
+
 const deleteById = async (request, response) => {
   const { id } = request.params
   try {
     const result = await TodoModel.deleteOne({ _id: id })
     if (result.deletedCount) {
-      response.sendStatus(200)
+      response.sendStatus(204)
     } else {
       response.status(404).json({ message: `No todo found with id ${id}` })
     }
@@ -74,8 +88,9 @@ const deleteById = async (request, response) => {
 
 module.exports = {
   findAll,
-  findById,
   search,
+  findById,
   create,
+  update,
   deleteById,
 }
