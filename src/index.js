@@ -1,11 +1,16 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const db = require('./config/db')
+require('./config/db')
 require('dotenv').config()
 const routes = require('./routes/index')
 
-app.use(cors())
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL ?? 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+  })
+)
 
 app.use(express.json())
 app.use(
@@ -16,8 +21,8 @@ app.use(
 
 app.use('/', routes)
 
-const { SERVER_PORT } = process.env
+const PORT = process.env.PORT ?? 8000
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Connected, listen on port ${SERVER_PORT}`)
+app.listen(PORT, () => {
+  console.log(`Connected, listen on port ${PORT}`)
 })

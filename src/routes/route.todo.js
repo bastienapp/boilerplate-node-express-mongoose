@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router()
 const {
   findAll,
-  findOne,
+  findById,
   search,
   create,
-} = require('../controllers/controller.sample')
+  deleteById,
+} = require('../controllers/controller.todo')
 
 router.get('/', findAll)
-router.get('/:id', findOne)
-router.get('/search/:query', search)
+router.get('/search', search)
+router.get('/:id', findById)
 router.post('/', create)
+router.delete('/:id', deleteById)
 
 module.exports = router

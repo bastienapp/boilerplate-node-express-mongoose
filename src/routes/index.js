@@ -1,7 +1,7 @@
 const express = require('express')
-const routeSample = require('./route.sample')
+const routeTodo = require('./route.todo')
 const router = express.Router()
 
-router.use('/messages', routeSample)
+router.use('/todos', routeTodo)
 
 module.exports = router
