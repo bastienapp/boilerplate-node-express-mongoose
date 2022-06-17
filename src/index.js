@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-require('./config/db')
+require('./config/mongodb')
 require('dotenv').config()
 const routes = require('./routes/index')
 
